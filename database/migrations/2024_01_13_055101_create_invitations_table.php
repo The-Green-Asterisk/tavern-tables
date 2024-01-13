@@ -21,7 +21,8 @@ return new class extends Migration
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('table_id')->constrained('tables');
+            $table->foreignId('table_id')->constrained('tables')->nullable();
+            $table->foreignId('tavern_id')->constrained('taverns');
             $table->foreignId('inviter_id')->constrained('users');
             $table->dateTime('accepted_at')->nullable();
             $table->foreignId('invitation_status_id')->constrained('invitation_statuses');
