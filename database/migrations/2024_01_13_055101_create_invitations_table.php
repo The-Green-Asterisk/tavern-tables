@@ -1,0 +1,53 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('invitation_statuses', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('name', 32)->unique();
+            $table->string('code', 32)->unique();
+        });
+        Schema::create('invitations', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignId('table_id')->constrained('tables');
+            $table->foreignId('inviter_id')->constrained('users');
+            $table->dateTime('accepted_at')->nullable();
+            $table->foreignId('invitation_status_id')->constrained('invitation_statuses');
+        });
+
+        DB::table('people', function (Blueprint $table) {
+            $table->foreignId('invitation_id')->nullable()->constrained('invitations');
+        });
+        DB::table('users', function (Blueprint $table) {
+            $table->foreignId('invitation_id')->nullable()->constrained('invitations');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        DB::table('people', function (Blueprint $table) {
+            $table->dropForeign(['invitation_id']);
+        });
+        DB::table('users', function (Blueprint $table) {
+            $table->dropForeign(['invitation_id']);
+        });
+
+        Schema::dropIfExists('invitations');
+        Schema::dropIfExists('invitation_statuses');
+    }
+};
