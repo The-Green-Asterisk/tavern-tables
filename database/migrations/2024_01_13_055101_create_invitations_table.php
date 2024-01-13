@@ -34,6 +34,12 @@ return new class extends Migration
         DB::table('users', function (Blueprint $table) {
             $table->foreignId('invitation_id')->nullable()->constrained('invitations');
         });
+
+        DB::table('invitation_statuses')->insert([
+            ['name' => 'Pending', 'code' => 'P'],
+            ['name' => 'Accepted', 'code' => 'A'],
+            ['name' => 'Declined', 'code' => 'D']
+        ]);
     }
 
     /**
