@@ -57,3 +57,29 @@ body {
         transform: rotate(360deg);
     }
 }
+
+#bar {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    width: 70%;
+    text-align: center;
+    padding: 0.5em;
+    border: 1px solid #dee2e6;
+    margin: 2em 0;
+    border-radius: 10px;
+}
+
+.table {
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+    width: 20em;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+.gm-label {
+    align-self: center;
+    text-align: center;
+}
