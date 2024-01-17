@@ -112,7 +112,6 @@ button {
     box-shadow: var(--md-shadow);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     padding: 1em;
 }
@@ -121,6 +120,25 @@ button {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+#modal #modal-header h2 {
+    margin: 0;
+    padding: 0;
+}
+#modal #modal-close {
+    align-self: center;
+    margin: 0;
+    padding: 0.5em;
+    border-radius: 10px;
+    border: none;
+    background-color: #29342f;
+    color: aliceblue;
+    box-shadow: var(--md-shadow);
+    cursor: pointer;
+}
+#modal #modal-body {
+    width: 100%;
+    flex-grow: 1;
 }
 #modal #modal-footer {
     display: flex;
