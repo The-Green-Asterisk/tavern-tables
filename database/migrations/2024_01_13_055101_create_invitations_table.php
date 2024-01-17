@@ -28,10 +28,10 @@ return new class extends Migration
             $table->foreignId('invitation_status_id')->constrained('invitation_statuses');
         });
 
-        DB::table('people', function (Blueprint $table) {
+        Schema::table('people', function (Blueprint $table) {
             $table->foreignId('invitation_id')->nullable()->constrained('invitations');
         });
-        DB::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreignId('invitation_id')->nullable()->constrained('invitations');
         });
 
@@ -47,10 +47,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('people', function (Blueprint $table) {
+        Schema::table('people', function (Blueprint $table) {
             $table->dropForeign(['invitation_id']);
         });
-        DB::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['invitation_id']);
         });
 

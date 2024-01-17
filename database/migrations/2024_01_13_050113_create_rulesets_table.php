@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('code', 32)->unique();
         });
 
-        DB::table('tables', function (Blueprint $table) {
+        Schema::table('tables', function (Blueprint $table) {
             $table->foreignId('ruleset_id')->nullable()->constrained();
         });
 
-        DB::table('ruleset')->insert(
+        DB::table('rulesets')->insert(
             ['name' => 'D&D 5e', 'code' => 'DD5'],
             ['name' => 'D&D 3.5e', 'code' => 'DD35'],
             ['name' => 'Traveler', 'code' => 'TR'],
@@ -62,7 +62,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('rulesets');
-        DB::table('tables', function (Blueprint $table) {
+        Schema::table('tables', function (Blueprint $table) {
             $table->dropForeign(['ruleset_id']);
         });
     }

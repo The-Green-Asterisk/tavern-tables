@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Invitation::class);
     }
+
+    public function characterNames()
+    {
+        return $this->hasMany(CharacterName::class);
+    }
 }
