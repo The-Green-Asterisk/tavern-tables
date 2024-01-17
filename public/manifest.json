@@ -1,0 +1,30 @@
+{
+    "name": "Tavern Tables",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "icons": [
+        {
+            "src": "/img/icon-32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "/img/icon-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/img/icon-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "short_name": "Tavern Tables",
+    "description": "Tavern Tables is a scheduling app for table top games where players can sign up to join tables and game masters can schedule their games.",
+    "orientation": "natural",
+    "prefer_related_applications": false,
+    "categories": ["games", "entertainment"],
+    "lang": "en-US"
+}
