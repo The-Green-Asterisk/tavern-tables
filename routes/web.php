@@ -15,3 +15,9 @@ use App\Http\Controllers;
 */
 
 Route::get('/', [Controllers\Home::class, 'index'])->name('home');
+Route::get('/signup', [Controllers\Session::class, 'signupForm'])->name('signup-form');
+Route::post('/signup', [Controllers\Session::class, 'signup'])->name('signup');
+Route::get('/login', [Controllers\Session::class, 'loginForm'])->name('login-form');
+Route::post('/login', [Controllers\Session::class, 'login'])->name('login');
+Route::get('/logout', [Controllers\Session::class, 'logout'])->name('logout');
+Route::get('/forgot-password', [Controllers\Session::class, 'forgotPassword'])->name('forgot-password');

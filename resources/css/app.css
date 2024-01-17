@@ -31,6 +31,13 @@ body {
     flex-direction: column;
     padding: 0.5em;
 }
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
 
 .loader {
     position: fixed;
@@ -56,6 +63,70 @@ body {
     to {
         transform: rotate(360deg);
     }
+}
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5em;
+    background-color: #29342f;
+    box-shadow: var(--md-shadow);
+    border-radius: 10px;
+    border:#4caf50 1px solid;
+}
+button {
+    align-self: center;
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 10px;
+    border: none;
+    background-color: #29342f;
+    color: aliceblue;
+    box-shadow: var(--md-shadow);
+    cursor: pointer;
+}
+#join-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2em 0;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999999;
+}
+#modal #modal-frame {
+    width: 30em;
+    height: 20em;
+    background-color: #29342f;
+    border-radius: 10px;
+    box-shadow: var(--md-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+}
+#modal #modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+#modal #modal-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    width: 100%;
 }
 
 #bar {

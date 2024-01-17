@@ -1,24 +1,9 @@
 @extends('layout')
-<div id="bar">
-    This is the waiting area
-</div>
-<div class="table">
-    <div class="gm-label">
-        <p>Game Master:</p>
-        <p>{{ isset($gm) ? $gm : 'Unknown' }}</p>
-    </div>
-    @if(isset($players))
-        @foreach($players as $player)
-            <div class="player">
-                <p>{{ $player->name }}</p>
-                <select class="character-names">
-                    <option value="0">None</option>
-                    @foreach($player->character_names as $character_name)
-                        <option value="{{ $character_name }}" selected="{{ $character_name->selected }}">{{ $character_name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        @endforeach
-    @endif
-    <input type="text" id="add-player" placeholder="Add player">
+<x-nav />
+
+Tavern Tables is an app that allows you to sign up for and schedule tabletop games. It uses the concept of a "tavern owner" that can create multiple tables, assign game masters to them and invite players to join. It's perfect for facilities or organizations that want to host multiple games at once, but it's also great for singular games that want to keep track of their players and schedules.
+
+<div id="join-buttons">
+    <button id="tavern-owner-join">Join as Tavern Owner</button>
+    <button id="player-join">Join as Player</button>
 </div>
