@@ -85,6 +85,18 @@ button {
     box-shadow: var(--md-shadow);
     cursor: pointer;
 }
+button:hover {
+    background-color: #4caf50;
+}
+input {
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 10px;
+    border: none;
+    background-color: #29342f;
+    color: aliceblue;
+    box-shadow: var(--md-shadow);
+}
 #join-buttons {
     display: flex;
     align-items: center;
@@ -107,7 +119,7 @@ button {
 #modal #modal-frame {
     width: 30em;
     height: 20em;
-    background-color: #29342f;
+    background-color: #245343;
     border-radius: 10px;
     box-shadow: var(--md-shadow);
     display: flex;
@@ -128,13 +140,17 @@ button {
 #modal #modal-close {
     align-self: center;
     margin: 0;
-    padding: 0.5em;
+    padding: .5em 1em;
     border-radius: 10px;
     border: none;
     background-color: #29342f;
     color: aliceblue;
     box-shadow: var(--md-shadow);
     cursor: pointer;
+}
+#modal #modal-close:hover {
+    box-shadow: var(--lg-shadow);
+    background-color: #4caf50;
 }
 #modal #modal-body {
     width: 100%;

@@ -1,6 +1,7 @@
 export default function (el) {
     const close = () => {
-        if (el.modal != null) {
+        el.initModal();
+        if (!!el.modal) {
             return new Promise(resolve => {
                 modal.remove();
                 document.removeEventListener('click', clickOutside);
@@ -9,8 +10,9 @@ export default function (el) {
         }
     };
     const clickOutside = (ev) => {
+        el.initModal();
         ev.stopImmediatePropagation();
-        if ((el.modalFrame != null && !el.modalFrame.contains(ev.target)) && el.loader.style.display === 'none') {
+        if ((!!el.modalFrame && !el.modalFrame.contains(ev.target)) && el.loader.style.display === 'none') {
             close();
         }
     };
