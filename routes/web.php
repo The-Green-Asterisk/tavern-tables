@@ -21,3 +21,6 @@ Route::get('/login', [Controllers\Session::class, 'loginForm'])->name('login-for
 Route::post('/login', [Controllers\Session::class, 'login'])->name('login');
 Route::get('/logout', [Controllers\Session::class, 'logout'])->name('logout');
 Route::get('/forgot-password', [Controllers\Session::class, 'forgotPassword'])->name('forgot-password');
+
+Route::get('/tavern/{id}', [Controllers\Tavern::class, 'index'])->name('tavern');
+Route::get('/tavern/create', [Controllers\Tavern::class, 'createForm'])->name('create-tavern-form');

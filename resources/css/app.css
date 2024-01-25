@@ -59,6 +59,9 @@ a:hover {
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+.invalid {
+    color: #f44336;
+}
 @keyframes spin {
     to {
         transform: rotate(360deg);

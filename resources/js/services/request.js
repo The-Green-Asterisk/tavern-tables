@@ -46,9 +46,23 @@ export default async function request(
     const response = await fetch(`${path}${routePostfix}`, payLoad);
 
     let result;
-    if (evalResult) result = await response.json();
+    if (evalResult) {
+        const type = response.headers.get('Content-Type');
+        console.log(type, response);
+        if (type.startsWith('application/json')) {
+            result = await response.json();
+        } else if (type.startsWith('text/html')) {
+            result = await response.text();
+        }
 
-    return evalResult ? result : response;
+        if (typeof result === 'string' && result.startsWith('http')) {
+            return window.location.href = result;
+        }
+
+        return result;
+    }
+
+    return response;
 }
 
 async function getPostfix(method, data) {

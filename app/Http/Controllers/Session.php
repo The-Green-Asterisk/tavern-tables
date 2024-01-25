@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Tavern;
 
 class Session extends Controller
 {
@@ -66,9 +71,10 @@ class Session extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function signup(Request $request)
     {
         $data = $request->toArray();
+        $tavern = new Tavern();
 
         $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -85,7 +91,8 @@ class Session extends Controller
                 'password' => Hash::make($data['password'])
             ]);
 
-            if ($data['tavern'] != null) {
+            if (isset($data['tavern'])) {
+                dd('tavern shouldn\'t be set');
                 $tavern = Tavern::find($data['tavern']);
                 $user->taverns()->attach($tavern);
             } else {
@@ -100,7 +107,7 @@ class Session extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('tavern', ['tavern', auth()->user()->taverns[0]->id]);
+            return route('tavern', ['id' => $tavern->id]);
         }
     }
 }

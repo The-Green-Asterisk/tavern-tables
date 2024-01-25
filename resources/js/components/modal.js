@@ -31,13 +31,13 @@ export default function (el) {
             });
     }
 
-    async function pop(res) {
+    async function pop(res, name) {
         function buildModal(data) {
             let incomingModal = document.createElement('div');
             incomingModal.innerHTML = data;
             el.body.appendChild(incomingModal.firstChild);
             document.onclick = e => { clickOutside(e) };
-            el.initModal();
+            el.initModal(name);
             if (el.modalClose) el.modalClose.onclick = () => { close() };
         }
         document.activeElement.blur();

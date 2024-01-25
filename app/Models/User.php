@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function taverns()
     {
-        return $this->belongsToMany(Tavern::class);
+        return $this->belongsToMany(Tavern::class, 'user_tavern');
     }
 
     public function tables()

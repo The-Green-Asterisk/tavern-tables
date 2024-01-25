@@ -7,12 +7,20 @@ export default class El {
     signup = document.querySelector('#signup');
     login = document.querySelector('#login');
 
-    initModal = () => {
+    initModal = (name) => {
         this.modal = document.querySelector('#modal');
         this.modalFrame = document.querySelector('#modal-frame');
         this.modalClose = document.querySelector('#modal-close');
         this.modalCancel = document.querySelector('#modal-cancel');
         this.modalConfirm = document.querySelector('#modal-confirm');
+
+        switch(name) {
+            case 'signup':
+                this.signupForm = document.querySelector('#signup-form');
+                break;
+            default:
+                break;
+        }
     }
 
     bar = document.querySelector('#bar');

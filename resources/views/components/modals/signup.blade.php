@@ -1,7 +1,6 @@
 <x-modals.modal>
 <x-slot:title>Sign Up</x-slot:title>
-<form method="POST" action="{{ route('signup') }}">
-    @csrf
+<form action="{{ route('signup') }}" id="signup-form">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus>
