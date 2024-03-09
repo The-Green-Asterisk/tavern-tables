@@ -35,10 +35,17 @@ export default class El {
         switch(name) {
             case 'signup':
                 this.signupForm = document.querySelector('#signup-form');
+                this.name = document.querySelector('#name');
                 this.email = document.querySelector('#email');
                 this.password = document.querySelector('#password');
                 this.passwordConfirm = document.querySelector('#password-confirm');
-                this.name = document.querySelector('#name');
+                this.roleRadioButtons = document.querySelectorAll('input[name="role"]');
+                this.tavernCodeBox = document.querySelector('#tavern-code-box');
+                break;
+            case 'login':
+                this.loginForm = document.querySelector('#login-form');
+                this.email = document.querySelector('#email');
+                this.password = document.querySelector('#password');
                 break;
             default:
                 break;

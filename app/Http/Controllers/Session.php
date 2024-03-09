@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Tavern;
+use App\Models\Role;
+use App\Controllers\Tavern as TavernController;
 
 class Session extends Controller
 {
@@ -31,14 +33,15 @@ class Session extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->getMessageBag(), 200);
+            return response()->json($validator->getMessageBag(), 403);
         } else {
-            if (auth()->attempt(['email' => $data['email'], 'password' => $data['password']], $data['remember_me'])) {
+            $remember = isset($data['remember_me']) ? $data['remember_me'] : false;
+            if (auth()->attempt(['email' => $data['email'], 'password' => $data['password']], $remember)) {
                 session()->regenerate();
 
-                return redirect()->route('tavern', ['tavern', auth()->user()->taverns[0]->id]);
+                return route('tavern', ['tavern', auth()->user()->taverns[0]->id]);
             } else {
-                return response()->json(['error' => 'Invalid credentials'], 200);
+                return response()->json(['error' => 'Invalid credentials'], 403);
             }
         }
     }
@@ -83,22 +86,30 @@ class Session extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->getMessageBag(), 500);
+            return response()->json($validator->getMessageBag(), 403);
         } else {
+            $tavern = Tavern::firstWhere('code', $data['tavern_code']);
+            $role = Role::firstWhere('code', $data['role']);
+
+            if ($role->code != "TK" && !$tavern) {
+                return response()->json(['error' => 'Invalid tavern code'], 403);
+            }
+
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password'])
             ]);
 
-            if (isset($data['tavern'])) {
-                dd('tavern shouldn\'t be set');
-                $tavern = Tavern::find($data['tavern']);
+            $user->roles()->attach($role);
+
+            if ($tavern != null) {
                 $user->taverns()->attach($tavern);
             } else {
                 $tavern = Tavern::create([
                     'name' => 'New Tavern',
                     'description' => '',
+                    'code' => TavernController::makeUniqueCode(),
                     'keeper_id' => $user->id
                 ]);
 

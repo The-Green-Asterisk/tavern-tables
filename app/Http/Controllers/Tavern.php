@@ -14,4 +14,15 @@ class Tavern extends Controller
             'taverns' => auth()->user()->taverns
         ]);
     }
+
+    static function makeUniqueCode()
+    {
+        $code = substr(md5(uniqid(mt_rand(), true)), 0, 6);
+        $tavern = TavernModel::where('code', $code)->first();
+        while ($tavern) {
+            $code = substr(md5(uniqid(mt_rand(), true)), 0, 6);
+            $tavern = TavernModel::where('code', $code)->first();
+        }
+        return $code;
+    }
 }

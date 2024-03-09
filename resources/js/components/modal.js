@@ -51,7 +51,6 @@ export default function (el) {
             el.body.appendChild(incomingModal.firstChild);
             document.onclick = e => { clickOutside(e) };
             el.initModal(name);
-            console.log(el.modalClose);
             if (el.modalClose) el.modalClose.onclick = () => { close() };
         }
         document.activeElement.blur();
