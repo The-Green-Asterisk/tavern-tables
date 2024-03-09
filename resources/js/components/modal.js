@@ -1,10 +1,9 @@
 export default function (el) {
     const close = () => {
-        el.initModal();
         if (!!el.modal) {
             return new Promise(resolve => {
                 modal.remove();
-                document.removeEventListener('click', clickOutside);
+                el.initModal();
                 resolve();
             });
         }
@@ -16,19 +15,33 @@ export default function (el) {
             close();
         }
     };
-    document.addEventListener('click', clickOutside);
 
     const flash = (res, goToAfter) => {
-        res.text()
-            .then((data) => {
-                let modal = document.createElement('div')
-                modal.innerHTML = data;
-                el.body.appendChild(modal.firstChild);
-                setTimeout(() => {
-                    close();
-                    if (goToAfter) window.location.href = goToAfter;
-                }, 3000);
-            });
+        if (res.status) {
+            res.text()
+                .then((data) => {
+                    document.onclick = null;
+                    let modal = document.createElement('div')
+                    modal.innerHTML = data;
+                    el.body.appendChild(modal.firstChild);
+                    el.initModal();
+                    setTimeout(() => {
+                        close();
+                        if (goToAfter) window.location.href = goToAfter;
+                        if (el.modal) document.onclick = e => { clickOutside(e) };
+                    }, 3000);
+                });
+        } else if (typeof res === 'string') {
+            document.onclick = null;
+            let modal = blankModal(res);
+            el.body.appendChild(modal);
+            el.initModal();
+            setTimeout(() => {
+                close();
+                if (goToAfter) window.location.href = goToAfter;
+                if (el.modal) document.onclick = e => { clickOutside(e) };
+            }, 3000);
+        }
     }
 
     async function pop(res, name) {
@@ -38,6 +51,7 @@ export default function (el) {
             el.body.appendChild(incomingModal.firstChild);
             document.onclick = e => { clickOutside(e) };
             el.initModal(name);
+            console.log(el.modalClose);
             if (el.modalClose) el.modalClose.onclick = () => { close() };
         }
         document.activeElement.blur();
@@ -50,6 +64,21 @@ export default function (el) {
         } else if (typeof res === 'string') {
             buildModal(res);
         }
+    }
+
+    function blankModal(text) {
+        let modal = document.createElement('div');
+        modal.id = 'modal';
+        modal.classList.add('modal');
+        modal.innerHTML = `
+            <div id="modal-frame" class="modal-frame">
+                <div="modal-body" class="modal-body">
+                    <p>${text}</p>
+                </div=>
+            </div>
+        `;
+
+        return modal;
     }
     
     return {

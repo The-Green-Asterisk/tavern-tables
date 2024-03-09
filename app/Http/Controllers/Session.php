@@ -83,7 +83,7 @@ class Session extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->getMessageBag(), 200);
+            return response()->json($validator->getMessageBag(), 500);
         } else {
             $user = User::create([
                 'name' => $data['name'],

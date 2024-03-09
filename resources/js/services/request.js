@@ -48,9 +48,11 @@ export default async function request(
     let result;
     if (evalResult) {
         const type = response.headers.get('Content-Type');
-        console.log(type, response);
+
         if (type.startsWith('application/json')) {
+            const responseCode = response.status;
             result = await response.json();
+            result.status = responseCode;
         } else if (type.startsWith('text/html')) {
             result = await response.text();
         }
