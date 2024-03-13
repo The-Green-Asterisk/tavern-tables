@@ -20,4 +20,21 @@ class Table extends Model
     {
         return $this->hasOne(Ruleset::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_table');
+    }
+
+    public function people()
+    {
+        $users = $this->belongsToMany(User::class, 'user_table')->get();
+        $people = $this->belongsToMany(Person::class)->get();
+        return $users->merge($people)->unique('email');
+    }
+
+    public function gm()
+    {
+        return $this->hasOne(User::class, 'id', 'gm_id');
+    }
 }

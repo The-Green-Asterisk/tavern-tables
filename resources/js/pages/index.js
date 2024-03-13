@@ -1,6 +1,8 @@
 import home from './home';
+import tavern from './tavern';
 
 const pages = {
-    home
+    home,
+    tavern
 };
 export default pages;

@@ -13,6 +13,9 @@ switch (constants.PathNames.basePath()) {
     case constants.PathNames.HOME:
         pages.home(elements, components);
         break;
+    case constants.PathNames.TAVERN:
+        pages.tavern(elements, components);
+        break;
     default:
         break;
 }

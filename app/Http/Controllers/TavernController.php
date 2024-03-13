@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tavern as TavernModel;
+use App\Models\Tavern;
 
-class Tavern extends Controller
+class TavernController extends Controller
 {
-    public function index(TavernModel $tavern)
+    public function index(Tavern $tavern)
     {
-        return view('tavern', [
+        return view('pages.tavern', [
             'tavern' => $tavern,
             'taverns' => auth()->user()->taverns
         ]);
@@ -18,10 +18,10 @@ class Tavern extends Controller
     static function makeUniqueCode()
     {
         $code = substr(md5(uniqid(mt_rand(), true)), 0, 6);
-        $tavern = TavernModel::where('code', $code)->first();
+        $tavern = Tavern::where('code', $code)->first();
         while ($tavern) {
             $code = substr(md5(uniqid(mt_rand(), true)), 0, 6);
-            $tavern = TavernModel::where('code', $code)->first();
+            $tavern = Tavern::where('code', $code)->first();
         }
         return $code;
     }

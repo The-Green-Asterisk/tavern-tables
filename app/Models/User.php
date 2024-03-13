@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function tables()
     {
-        return $this->belongsToMany(Table::class);
+        return $this->belongsToMany(Table::class, 'user_table');
     }
 
     public function invitation()
@@ -62,5 +62,10 @@ class User extends Authenticatable
     public function characterNames()
     {
         return $this->hasMany(CharacterName::class);
+    }
+
+    public function isDm()
+    {
+        return Table::where('gm_id', $this->id)->count() > 0;
     }
 }

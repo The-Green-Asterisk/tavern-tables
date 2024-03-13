@@ -3,6 +3,7 @@ export default class El {
     body = document.querySelector('body');
     loader = document.querySelector('#loader');
     userId = document.querySelector('#user-id')?.value;
+    tavernId = document.querySelector('#tavern-id')?.value;
     crfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     signup = document.querySelector('#signup');
@@ -47,6 +48,12 @@ export default class El {
                 this.email = document.querySelector('#email');
                 this.password = document.querySelector('#password');
                 break;
+            case 'create-table':
+                this.createTableForm = document.querySelector('#create-table-form');
+                this.name = document.querySelector('#name');
+                this.gmId = document.querySelector('#gm-id');
+                this.rulesetId = document.querySelector('#ruleset-id');
+                break;
             default:
                 break;
         }
@@ -54,6 +61,9 @@ export default class El {
 
     bar = document.querySelector('#bar');
     tables = document.querySelectorAll('.table');
+
+    createTableButton = document.querySelector('#create-table-button');
+    addPlayerBoxes = document.querySelectorAll('.add-player-box');
     
     constructor() {
         //

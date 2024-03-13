@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Tavern;
 use App\Models\Role;
-use App\Controllers\Tavern as TavernController;
+use App\Http\Controllers\TavernController;
 
-class Session extends Controller
+class SessionController extends Controller
 {
     public function signupForm()
     {
@@ -39,7 +39,7 @@ class Session extends Controller
             if (auth()->attempt(['email' => $data['email'], 'password' => $data['password']], $remember)) {
                 session()->regenerate();
 
-                return route('tavern', ['tavern', auth()->user()->taverns[0]->id]);
+                return route('tavern', auth()->user()->taverns[0]->id);
             } else {
                 return response()->json(['error' => 'Invalid credentials'], 403);
             }
@@ -83,6 +83,7 @@ class Session extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users', 'max:255'],
             'password' => ['required', 'min:6', 'confirmed'],
+            'role' => ['required', 'string', 'max:2'],
         ]);
 
         if ($validator->fails()) {
@@ -118,7 +119,7 @@ class Session extends Controller
 
             Auth::login($user);
 
-            return route('tavern', ['id' => $tavern->id]);
+            return route('tavern', $tavern->id);
         }
     }
 }
