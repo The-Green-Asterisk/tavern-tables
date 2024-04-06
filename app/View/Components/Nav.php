@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class Nav extends Component
 {
+    public $taverns = [];
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($taverns)
     {
-        //
+        $this->taverns = $taverns;
     }
 
     /**
@@ -21,6 +22,8 @@ class Nav extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.nav');
+        return view('components.nav', [
+            'taverns' => $this->taverns
+        ]);
     }
 }

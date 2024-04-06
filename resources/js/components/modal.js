@@ -71,9 +71,9 @@ export default function (el) {
         modal.classList.add('modal');
         modal.innerHTML = `
             <div id="modal-frame" class="modal-frame">
-                <div="modal-body" class="modal-body">
+                <div id="modal-body" class="modal-body">
                     <p>${text}</p>
-                </div=>
+                </div>
             </div>
         `;
 

@@ -69,6 +69,7 @@ a:hover {
 }
 nav {
     display: flex;
+    position: relative;
     justify-content: space-around;
     align-items: center;
     padding: 0.5em;
@@ -188,4 +189,45 @@ input {
 .gm-label {
     align-self: center;
     text-align: center;
+}
+
+#tavern-menu {
+    display: flex;
+    position: relative;
+    top:0;
+    flex-direction: column;
+    align-self: center;
+    border-radius: 10px;
+    background-color: #29342f;
+}
+
+#tavern-menu-button {
+    align-self: center;
+    border-radius: 10px;
+    border: none;
+    background-color: #29342f;
+    color: aliceblue;
+    box-shadow: var(--md-shadow);
+    cursor: pointer;
+}
+
+#tavern-menu-options {
+    display: none;
+    position: absolute;
+    top: 1.5em;
+    white-space: nowrap;
+    background-color: #29342f;
+    border-radius: 10px;
+    box-shadow: var(--md-shadow);
+    padding: 0.5em;
+}
+
+#tavern-menu-button:hover + #tavern-menu-options {
+    display: flex;
+    flex-direction: column;
+}
+
+#tavern-menu-options:hover {
+    display: flex;
+    flex-direction: column;
 }
